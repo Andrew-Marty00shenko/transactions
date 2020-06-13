@@ -1,7 +1,10 @@
 .main-table{
     text-align: center;
-    
-    &__text{
+
+    &__buttons{
         
+        button{
+            margin-right: 10px;
+        }
     }
 }
