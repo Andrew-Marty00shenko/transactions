@@ -34,19 +34,27 @@ const MainTable = ({ list }) => {
         onCheckboxBtnClick(2);
     }
 
-    // const filterByDate = () => {
-    //     const currState = [...filter];
-    //     const newState = currState.filter(date => new Date().getDate(date.date) <= new Date().getDate() && date);
-    //     setFilter(newState);
-    //     onCheckboxBtnClick(3);
-    // }
-
     const filterByValue = () => {
         const currState = [...filter];
         const newState = currState.filter(value => value.value > 1000);
         const sortState = newState.sort((a, b) => b.value - a.value);
         setFilter(sortState);
         onCheckboxBtnClick(3);
+    }
+
+    const filterByDate = () => {
+        const date = new Date();
+        const currState = [...filter];
+        const newState = currState.filter(d =>
+            new Date(d.date) >=
+            new Date(String(date.getFullYear()) +
+                "-" +
+                String(date.getMonth() + 1) + "-01"
+            )
+        )
+        const sortState = newState.sort((a, b) => b.value - a.value);
+        setFilter(sortState);
+        onCheckboxBtnClick(4);
     }
 
     return (
@@ -86,6 +94,13 @@ const MainTable = ({ list }) => {
                             active={activeBtn.includes(3)}
                         >
                             Более 1000
+                            </Button>
+                        <Button
+                            color="secondary"
+                            onClick={filterByDate}
+                            active={activeBtn.includes(4)}
+                        >
+                            За последний месяц
                             </Button>
                     </ButtonGroup>
                 </div>
